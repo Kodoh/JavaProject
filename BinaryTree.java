@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class BinaryTree {
     private ArrayList<Node> items;
     public BinaryTree(ArrayList<Integer> item) {
@@ -75,12 +76,53 @@ public boolean isAVL() {
     return AVL;
 }
 
-public void reBalanceSimple(Node n) {
-        Node temp = new Node(n.getValue());
-        temp.setLeft(n.getLeft().getRight());
-        n = n.getLeft();
-        
+public void insert(int x) {
+    Node c = new Node(x);
+    Node current = this.items.get(0);  
+    while ((current.getValue() > c.getValue() && current.getLeft() != null)  || (current.getValue() < c.getValue() && current.getRight() != null)) {
+        if (current.getValue() < c.getValue()) {
+            Node temp = current.getRight();
+            current = temp;
+        }
+        else {
+            Node temp = current.getLeft();
+            current = temp;
+        }
+    }
+    if (current.getValue() < c.getValue()) {
+        current.setRight(c);
+    }
+    else {
+        current.setLeft(c);
+    }
+}
 
+public void inorder(Node node) {
+    if (node == null) {
+        return;
+    }
+    inorder(node.getLeft());
+    System.out.println(node.getValue() + " ");
+    inorder(node.getRight());
+    
+}
+
+public void preorder(Node node) {
+    if (node == null) {
+        return;
+    }
+    System.out.println(node.getValue() + " ");
+    preorder(node.getLeft());
+    preorder(node.getRight());
+}
+
+public void postorder(Node node) {
+    if (node == null) {
+        return;
+    }
+    postorder(node.getLeft());
+    postorder(node.getRight());
+    System.out.println(node.getValue() + " ");
 }
 
 

@@ -21,5 +21,8 @@ public class Node {
     public void setRight(Node newRight) {
         this.right = newRight;
     }
+    public void setValue(int value) {
+        this.value = value;
+    }
 
 }

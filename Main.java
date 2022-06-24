@@ -9,8 +9,8 @@ public class Main {
         test.add(3);
         BinaryTree first = new BinaryTree(test);
         ArrayList<Node> items = first.getItems();
-        first.reBalanceSimple(items.get(0));
-        first.print(items.get(0));
+        first.insert(5);
+        first.postorder(items.get(0));
     }
 }
 
