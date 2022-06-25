@@ -126,6 +126,8 @@ public void postorder(Node node) {
 }
 
 
+
+
 public void print(Node c) {
         print("", c, false);
     }
@@ -139,5 +141,65 @@ public void print(Node c) {
     }
         
 
-
+public int getMin(Node node) {
+    if (node.getLeft() == null) {
+        return node.getValue();
+    } else {
+        return getMin(node.getLeft());
+    }
 }
+
+public int getMax(Node node) {
+    if (node.getRight() == null) {
+        return node.getValue();
+    } else {
+        return getMax(node.getRight());
+    }
+}
+
+public Node deleteNode(Node root, int key) {
+    if(root == null) return root;
+    if(key > root.getValue()){ //move right
+        root.setRight(deleteNode(root.getRight(), key));
+    }else if(key < root.getValue()){ //move left
+        root.setLeft(deleteNode(root.getLeft(), key));
+    }else{ //oh yes, we finally found the target
+        if(root.getLeft() == null && root.getRight() == null){ //hmm, its a leaf node; easy peasy
+            root = null;
+        }else if(root.getRight() != null){ // oh, it has a getRight() child, don't make it an orphan or is it old enough to become a parent ? lets find out
+            root.setValue(successor(root)); // my worthy successor
+            root.setRight(deleteNode(root.getRight(), root.getValue()));
+        }else{ //oh it seems that I do not have a worthy successor, fallback, fallback ...
+            root.setValue(predecessor(root));
+            root.setLeft(deleteNode(root.getLeft(), root.getValue()));
+        }
+    }
+    return root;
+}
+/**
+ * Return node's successor getValue()ue
+ * @param root
+ * @return
+ */
+private int successor(Node root){
+    root = root.getRight();
+    while(root.getLeft() != null){
+        root = root.getLeft();
+    }
+    return root.getValue();
+}
+/**
+ * Return node's predecessor getValue()ue
+ * @param root
+ * @return
+ */
+private int predecessor(Node root){
+    root = root.getLeft();
+    while(root.getRight() != null){
+        root = root.getRight();
+    }
+    return root.getValue();
+}
+}
+
+

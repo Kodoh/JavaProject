@@ -10,7 +10,9 @@ public class Main {
         BinaryTree first = new BinaryTree(test);
         ArrayList<Node> items = first.getItems();
         first.insert(5);
-        first.postorder(items.get(0));
+        System.out.println(first.getMax(items.get(0)));
+        first.deleteNode(items.get(0), 2);
+        first.print(items.get(0));
     }
 }
 
